@@ -1,0 +1,21 @@
+﻿@model Employees.Models.Employee
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h1>Register</h1>
+<h4>Employee</h4>
+<hr />
+<script>
+    void (0);
+</script>
+<form method="post" asp-action="Register" asp-controller="Home">
+    <label asp-for="Name">Name : </label>
+    <input asp-for="Name" placeholder="Enter your name" />
+    <span asp-validation-for="Name" class="text-danger"></span>
+    <label asp-for="Home">City : </label>
+    <input asp-for="Home" placeholder="Enter your city" />
+    <span asp-validation-for="Home" class="text-danger"></span>
+    <input type="submit" />
+</form>
