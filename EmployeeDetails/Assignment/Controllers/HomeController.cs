@@ -39,13 +39,35 @@ namespace Employees.Controllers
         {
             return View();
         }
+        [HttpPut]
+        public ActionResult Register(HomeDetailsViewModel homeDetailsViewModel)
+        {
+            return RedirectToAction("Details", new { @id = homeDetailsViewModel.Employee.Id });
+        }
 
         [HttpPost]
-        public ActionResult Register(string Name, string Home)
+        public IActionResult Register(Employee employee)
         {
-            Employee employee = new Employee() { Name = Name, Home = Home };
-            Employee newEmployee = _employeeRepositary.AddEmployee(employee);
-            return RedirectToAction("Details", new { @id=newEmployee.Id});
+            if (ModelState.IsValid)
+            {
+                HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel()
+                {
+                    Employee = employee,
+                    PageTitle = "Employee Details"
+                };
+                Employee newEmployee = _employeeRepositary.AddEmployee(employee);
+                return RedirectToAction("Details", new { @id = newEmployee.Id });
+            }
+            return View();
+        }
+        public IActionResult Edit(HomeDetailsViewModel homeDetailsViewModel)
+        {
+            return RedirectToAction("Register",homeDetailsViewModel);
+        }
+        public IActionResult Delete(Employee employee)
+        {
+            _employeeRepositary.DeleteEmploye(employee.Id);
+            return RedirectToAction("Index", "Home");
         }
     }
 }
