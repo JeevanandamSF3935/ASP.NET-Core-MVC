@@ -194,7 +194,6 @@ C:\Users\JeevanandamPerumal\source\repos\EmployeeDetails\Assignment\bin\Debug\ne
 C:\Users\JeevanandamPerumal\source\repos\EmployeeDetails\Assignment\bin\Debug\netcoreapp3.1\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\JeevanandamPerumal\source\repos\EmployeeDetails\Assignment\bin\Debug\netcoreapp3.1\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\JeevanandamPerumal\source\repos\EmployeeDetails\Assignment\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
-C:\Users\JeevanandamPerumal\source\repos\EmployeeDetails\Assignment\obj\Debug\netcoreapp3.1\Employees.csproj.AssemblyReference.cache
 C:\Users\JeevanandamPerumal\source\repos\EmployeeDetails\Assignment\obj\Debug\netcoreapp3.1\Employees.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\JeevanandamPerumal\source\repos\EmployeeDetails\Assignment\obj\Debug\netcoreapp3.1\Employees.AssemblyInfoInputs.cache
 C:\Users\JeevanandamPerumal\source\repos\EmployeeDetails\Assignment\obj\Debug\netcoreapp3.1\Employees.AssemblyInfo.cs
@@ -222,3 +221,5 @@ C:\Users\JeevanandamPerumal\source\repos\EmployeeDetails\Assignment\obj\Debug\ne
 C:\Users\JeevanandamPerumal\source\repos\EmployeeDetails\Assignment\obj\Debug\netcoreapp3.1\Employees.dll
 C:\Users\JeevanandamPerumal\source\repos\EmployeeDetails\Assignment\obj\Debug\netcoreapp3.1\Employees.pdb
 C:\Users\JeevanandamPerumal\source\repos\EmployeeDetails\Assignment\obj\Debug\netcoreapp3.1\Employees.genruntimeconfig.cache
+C:\Users\JeevanandamPerumal\source\repos\EmployeeDetails\Assignment\obj\Debug\netcoreapp3.1\Employees.csproj.AssemblyReference.cache
+C:\Users\JeevanandamPerumal\source\repos\EmployeeDetails\Assignment\obj\Debug\netcoreapp3.1\Razor\Views\Home\Edit.cshtml.g.cs
