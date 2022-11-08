@@ -40,18 +40,35 @@ namespace Employees.Controllers
             ViewData["Title"] = "Register";
             return View();
         }
+<<<<<<< HEAD
    
+=======
+        [HttpPut]
+        public ActionResult Register(HomeDetailsViewModel homeDetailsViewModel)
+        {
+            return RedirectToAction("Details", new { @id = homeDetailsViewModel.Employee.Id });
+        }
+>>>>>>> 6777718e6d03e3d7796d95775719de3e1a8bd87c
 
         [HttpPost]
         public IActionResult Register(Employee employee)
         {
             if (ModelState.IsValid)
             {
+<<<<<<< HEAD
+=======
+                HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel()
+                {
+                    Employee = employee,
+                    PageTitle = "Employee Details"
+                };
+>>>>>>> 6777718e6d03e3d7796d95775719de3e1a8bd87c
                 Employee newEmployee = _employeeRepositary.AddEmployee(employee);
                 return RedirectToAction("Details", new { @id = newEmployee.Id });
             }
             return View();
         }
+<<<<<<< HEAD
         public IActionResult Edit(Employee employee)
         {
             return View(employee);
@@ -72,6 +89,16 @@ namespace Employees.Controllers
             Employee employee = _employeeRepositary.GetAllEmployees().FirstOrDefault(s => s.Id.Equals(Id));
             _employeeRepositary.DeleteEmployee(employee);
             return RedirectToAction("ViewDetails", "Home");
+=======
+        public IActionResult Edit(HomeDetailsViewModel homeDetailsViewModel)
+        {
+            return RedirectToAction("Register",homeDetailsViewModel);
+        }
+        public IActionResult Delete(Employee employee)
+        {
+            _employeeRepositary.DeleteEmploye(employee.Id);
+            return RedirectToAction("Index", "Home");
+>>>>>>> 6777718e6d03e3d7796d95775719de3e1a8bd87c
         }
     }
 }

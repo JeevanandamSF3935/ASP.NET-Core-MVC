@@ -17,8 +17,13 @@
                 <h4>Phone Number : @Model.Employee.PhoneNumber</h4>
                 <div class="card-footer text-center">
                     <a href="@Url.Action("ViewDetails","Home")" class="btn btn-primary">Back</a>
+<<<<<<< HEAD
                     <a href="@Url.Action("Edit","Home",Model.Employee)" class="btn btn-primary">Edit</a>
                     <a href="@Url.Action("Delete","Home",new { @Id = Model.Employee.Id})" class="btn btn-danger">Delete</a>
+=======
+                    <a href="@Url.Action("Edit","Home")" class="btn btn-primary">Edit</a>
+                    <a href="@Url.Action("Delete","Home",Model.Employee)" class="btn btn-danger">Delete</a>
+>>>>>>> 6777718e6d03e3d7796d95775719de3e1a8bd87c
                 </div>
             </div>
         </div>
