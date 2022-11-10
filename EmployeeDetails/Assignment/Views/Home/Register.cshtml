@@ -1,51 +1,82 @@
-﻿@model Employees.Models.Employee
+﻿@model Employees.ViewModels.HomeDetailsViewModel
+@{
+    ViewBag.Title = "Register";
+}
 
+<h1 style="text-align:center;background-color:grey;height:stretch">@ViewBag.Title<hr /></h1>
 
-<h1 style="text-align:center">@ViewData["Title"]</h1>
-<hr />
-<form asp-action="Register" asp-controller="Home" method="post" class="mt-3">
-    <table style="margin-left:11.4cm">
-        <tr>
-            <td>
-                <label asp-for="Name">Name : </label>
-            </td>
-            <td>
-                <input asp-for="Name" placeholder="Enter your name" /><br />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label asp-for="Home">City : </label>
-            </td>
-            <td>
-                <input asp-for="Home" placeholder="Enter your city" /><br />
-                <span asp-validation-for="Home" class="text-danger"></span>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label asp-for="MailId">Mail ID : </label>
-            </td>
-            <td>
-                <input asp-for="MailId" placeholder="Enter your mailid" /><br />
-                <span asp-validation-for="MailId" class="text-danger"></span>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label asp-for="PhoneNumber">Phone Number : </label>
-            </td>
-            <td>
-                <input asp-for="PhoneNumber" placeholder="Enter your phone number" /><br />
-                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-            </td>
-        </tr>
-    </table>
+<form asp-action="Register" asp-controller="Home" method="post" class="mt-3" enctype="multipart/form-data">
+    <div style="padding-left:450px">
+        <table style="border:thick,solid;border-color:black;background-color:white;font-weight:bold">
+            <tr>
+                <td>
+                    <label asp-for="Name">Name : </label>
+                </td>
+                <td>
+                    <input asp-for="Name" placeholder="Enter your name" /><br />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Home">City : </label>
+                </td>
+                <td>
+                    <input asp-for="Home" placeholder="Enter your city" /><br />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="MailId">Mail ID : </label>
+                </td>
+                <td>
+                    <input asp-for="MailId" placeholder="Enter your mailid" /><br />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="PhoneNumber">Phone Number : </label>
+                </td>
+                <td>
+                    <input asp-for="PhoneNumber" placeholder="Enter your phone number" /><br />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="ProfileImage">Image : </label>
+                </td>
+                <td>
+                    <input asp-for="ProfileImage" class="custom-file-input" id="customFile">
+                </td>
+            </tr>
+        </table>
+    </div>
     <br />
-    <div class="text-center">
-        <input class="btn btn-primary" type="submit" />
-        <a href="@Url.Action("Index","Home")" class="btn btn-primary">Home</a>
+    <div style="text-align:center">
+        <span asp-validation-for="Name" class="text-bg-danger"></span><br />
+        <span asp-validation-for="Home" class="text-bg-danger"></span><br />
+        <span asp-validation-for="MailId" class="text-bg-danger"></span><br />
+        <span asp-validation-for="PhoneNumber" class="text-bg-danger"></span><br />
+        <span asp-validation-for="ProfileImage" class="text-bg-danger"></span><br />
+    </div>
+    <div class="text-center" style="text-align: center;background-color:grey; width: stretch; height:stretch">
+        <br />
+        <br />
+        <input class="btn btn-dark btn-outline-success" type="submit" />
+        <a href="@Url.Action("Index","Home")" class="btn btn-dark btn-outline-success">Home</a>
+        <br />
+        <br />
+        <h4 style="text-align:center">
+            Contact : <a href="https://www.office.com/">frontoffice@syncfusion.com</a>
+        </h4>
+        <br />
+        <br />
     </div>
 </form>
-
+@section Scripts{
+    <script type="text/javascript">
+        $(".custom-file-input").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
+}

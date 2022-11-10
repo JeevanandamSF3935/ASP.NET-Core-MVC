@@ -1,18 +1,21 @@
-﻿using System;
-using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Employees.Models;
+﻿using Employees.Models;
 using Employees.ViewModels;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.IO;
+using System.Linq;
 
 namespace Employees.Controllers
 {
-    public class HomeController:Controller
+    public class HomeController : Controller
     {
         private readonly IEmployeeRepositary _employeeRepositary;
-        public HomeController(IEmployeeRepositary employeeRepositary)
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        public HomeController(IEmployeeRepositary employeeRepositary,IWebHostEnvironment webHostEnvironment)
         {
+            _webHostEnvironment = webHostEnvironment;
             _employeeRepositary = employeeRepositary;
         }
         public ActionResult Index()
@@ -27,78 +30,89 @@ namespace Employees.Controllers
         }
         public ActionResult Details(int id)
         {
-            HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel()
-            {
-                Employee = _employeeRepositary.GetEmployee(id),
-                PageTitle = "Employee Details"
-            };
-            return View(homeDetailsViewModel);
+            Employee employee = _employeeRepositary.GetEmployee(id);
+            return View(employee);
         }
-        [HttpGet]
         public ActionResult Register()
         {
-            ViewData["Title"] = "Register";
+            ViewBag.Title = "Register";
             return View();
         }
-<<<<<<< HEAD
-   
-=======
-        [HttpPut]
-        public ActionResult Register(HomeDetailsViewModel homeDetailsViewModel)
+
+        private string UploadedFile(HomeDetailsViewModel model)
         {
-            return RedirectToAction("Details", new { @id = homeDetailsViewModel.Employee.Id });
+            string uniqueFileName = null;
+
+            if (model.ProfileImage != null)
+            {
+                string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "uploadedImages");
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + model.ProfileImage.FileName;
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                using var fileStream = new FileStream(filePath, FileMode.Create);
+                model.ProfileImage.CopyTo(fileStream);
+            }
+            return uniqueFileName;
         }
->>>>>>> 6777718e6d03e3d7796d95775719de3e1a8bd87c
 
         [HttpPost]
-        public IActionResult Register(Employee employee)
+        public IActionResult Register(HomeDetailsViewModel homeDetailsViewModel)
         {
             if (ModelState.IsValid)
             {
-<<<<<<< HEAD
-=======
-                HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel()
+                string uniqueFileName = UploadedFile(homeDetailsViewModel);
+                Employee employee = new Employee()
                 {
-                    Employee = employee,
-                    PageTitle = "Employee Details"
+                    Id = homeDetailsViewModel.Id,
+                    Name = homeDetailsViewModel.Name,
+                    Home = homeDetailsViewModel.Home,
+                    MailId = homeDetailsViewModel.MailId,
+                    PhoneNumber = homeDetailsViewModel.PhoneNumber,
+                    ProfileImage = uniqueFileName
                 };
->>>>>>> 6777718e6d03e3d7796d95775719de3e1a8bd87c
+                
                 Employee newEmployee = _employeeRepositary.AddEmployee(employee);
                 return RedirectToAction("Details", new { @id = newEmployee.Id });
             }
             return View();
         }
-<<<<<<< HEAD
         public IActionResult Edit(Employee employee)
         {
-            return View(employee);
-        }
-        [HttpPost]
-        public IActionResult Edit(Employee employee,int Id)
-        {
-            _employeeRepositary.EditEmployee(employee);
             HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel()
             {
-                Employee = employee,
-                PageTitle = "Edited Details"
+                Id = employee.Id,
+                Name = employee.Name,
+                MailId = employee.MailId,
+                PhoneNumber = employee.PhoneNumber,
+                Home = employee.Home
             };
-            return RedirectToAction("Details", new { @id = homeDetailsViewModel.Employee.Id });
+            return View(homeDetailsViewModel);
+        }
+        [HttpPost]
+        public IActionResult Edit(HomeDetailsViewModel homeDetailsViewModel, int Id)
+        {
+            if (ModelState.IsValid)
+            {
+                string uniqueFileName = UploadedFile(homeDetailsViewModel);
+                Employee employee = new Employee()
+                {
+                    Id = homeDetailsViewModel.Id,
+                    Name = homeDetailsViewModel.Name,
+                    Home = homeDetailsViewModel.Home,
+                    MailId = homeDetailsViewModel.MailId,
+                    PhoneNumber = homeDetailsViewModel.PhoneNumber,
+                    ProfileImage = uniqueFileName
+                };
+                _employeeRepositary.EditEmployee(employee);
+
+                return RedirectToAction("Details", new { @id = employee.Id });
+            }
+            return View();
         }
         public IActionResult Delete(int Id)
         {
             Employee employee = _employeeRepositary.GetAllEmployees().FirstOrDefault(s => s.Id.Equals(Id));
             _employeeRepositary.DeleteEmployee(employee);
             return RedirectToAction("ViewDetails", "Home");
-=======
-        public IActionResult Edit(HomeDetailsViewModel homeDetailsViewModel)
-        {
-            return RedirectToAction("Register",homeDetailsViewModel);
-        }
-        public IActionResult Delete(Employee employee)
-        {
-            _employeeRepositary.DeleteEmploye(employee.Id);
-            return RedirectToAction("Index", "Home");
->>>>>>> 6777718e6d03e3d7796d95775719de3e1a8bd87c
         }
     }
 }

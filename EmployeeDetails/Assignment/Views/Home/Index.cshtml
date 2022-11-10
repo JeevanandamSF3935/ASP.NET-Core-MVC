@@ -1,10 +1,38 @@
-﻿@{ 
+﻿@{
     ViewBag.Title = "Home Page";
 }
-<h1>
-    Employee Management
-</h1>
-<div class="container">
-    <a href="@Url.Action("Register","Home")" class="btn btn-primary">Register</a>
-    <a href="@Url.Action("ViewDetails","Home")" class="btn btn-primary">View Details</a>
+<div style="background-color:grey;width:stretch;height:75px">
+    <h3 style="font-family:'Century Gothic';font-style:italic;text-align:center;font-weight:bolder">
+        <img height="70px" width="100px" src="~/images/syncfusion.png" />
+        Syncfusion Private Limited
+    </h3>
+</div>
+<table>
+    <tr>
+        <td>
+            <img height="300px" width="370px" src="~/images/syncfusionoffice.png" /><br />
+            <h5 style="text-align:center">Mathura Towers, Chennai</h5>
+        </td>
+        <td>
+            <img height="300px" width="400px" src="~/images/workplace.png" /><br />
+            <h5 style="text-align:center">Work Space</h5>
+        </td>
+        <td>
+            <img height="300px" src="~/images/teams.png" /><br />
+            <h5 style="text-align:center">Team Meating</h5>
+        </td>
+    </tr>
+</table>
+<div style="text-align: center;background-color:grey; width: stretch; height: stretch">
+    <br />
+    <br />
+    <a href="@Url.Action("Register","Home")" class="btn btn-dark btn-outline-success">AddEmployee</a>
+    <a href="@Url.Action("ViewDetails","Home")" class="btn btn-dark btn-outline-success">View Employees</a>
+    <br />
+    <br />
+    <h4 style="text-align:center">
+        Contact : <a href="https://www.office.com/">frontoffice@syncfusion.com</a>
+    </h4>
+    <br />
+    <br />
 </div>

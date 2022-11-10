@@ -1,15 +1,24 @@
 ﻿using Employees.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations;
 
 namespace Employees.ViewModels
 {
     public class HomeDetailsViewModel
     {
-        public Employee Employee { get; set; }
-        public string PageTitle { get; set; }
-
+        public int Id { get; set; }
+        [Required]
+        [StringLength(50)]
+        public string Name { get; set; }
+        [Required]
+        [StringLength(10)]
+        public string Home { get; set; }
+        [Required]
+        [StringLength(50)]
+        public string MailId { get; set; }
+        [Required]
+        [StringLength(10)]
+        public string PhoneNumber { get; set; }
+        public IFormFile ProfileImage { get; set; }
     }
 }

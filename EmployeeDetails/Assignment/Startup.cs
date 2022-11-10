@@ -1,15 +1,10 @@
 using Employees.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Assignment
 {
@@ -23,8 +18,9 @@ namespace Assignment
         }
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IEmployeeRepositary,EmployeeRepositary>();
-            services.AddMvc(options => options.EnableEndpointRouting=false).AddXmlSerializerFormatters();
+            services.AddDbContext<EmployeeDbContext>(options => options.UseNpgsql(_config.GetConnectionString("EmployeeDb")));
+            services.AddScoped<IEmployeeRepositary, DbEmployeeRepositary>();
+            services.AddMvc(options => options.EnableEndpointRouting = false).AddXmlSerializerFormatters();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -35,10 +31,11 @@ namespace Assignment
             }
 
             app.UseStaticFiles();
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute("default", "/{controller=Home}/{action=Index}/{id?}");
-            });
+            app.UseMvcWithDefaultRoute();
+            //app.UseMvc(routes =>
+            //{
+            //    routes.MapRoute("default", "/{controller=Home}/{action=Index}/{id?}");
+            //});
         }
     }
 }

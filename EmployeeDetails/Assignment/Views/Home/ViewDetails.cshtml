@@ -5,18 +5,22 @@
 <h1>
     All Employees
 </h1>
+@{ 
+    var employees = Model.Select(x => x).OrderBy(x => x.Id);
+}
 
 <div class="card-deck">
-    @foreach (var employee in Model)
+    @foreach (var employee in employees)
     {
-    <div class="card m-3 text-center">
-        <h3>@employee.Name</h3>
-        <div class="card-footer">
-            <a href="@Url.Action("Details","Home",new { @id = employee.Id})" class="btn btn-primary">View</a>
-            <a href="@Url.Action("Edit","Home",employee)" class="btn btn-primary">Edit</a>
-            <a href="@Url.Action("Delete","Home",new { @Id = employee.Id})" class="btn btn-danger">Delete</a>
+        <div class="card m-3 text-center">
+            <h3>@employee.Name</h3>
+            <div style="text-align:center"><img width="150px" height="118px"src="~/uploadedImages/@employee.ProfileImage" asp-append-version="true" /></div>
+            <div class="card-footer">
+                <a href="@Url.Action("Details","Home",new { @id = employee.Id})" class="btn btn-primary">View</a>
+                <a href="@Url.Action("Edit","Home",employee)" class="btn btn-primary">Edit</a>
+                <a href="@Url.Action("Delete","Home",new { @Id = employee.Id})" class="btn btn-danger">Delete</a>
+            </div>
         </div>
-    </div>
     }
 </div>
 <div style="margin-top:1cm" class="card-footer text-center">

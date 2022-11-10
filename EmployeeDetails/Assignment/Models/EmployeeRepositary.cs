@@ -10,15 +10,9 @@ namespace Employees.Models
 
         public EmployeeRepositary()
         {
-<<<<<<< HEAD
-            _employeesList.Add(new Employee() { Id=++s_id, Name = "Jeeva", Home = "Hosur" ,MailId="jeeva@gmail.com",PhoneNumber="8526764646"});
-            _employeesList.Add(new Employee() { Id=++s_id, Name = "Vikram", Home = "Chennai",MailId="vikram@hotmail.com",PhoneNumber="8220417431" });
-            _employeesList.Add(new Employee() { Id=++s_id, Name = "Samiulla", Home = "Rayakottai",MailId="sam@yahoo.com",PhoneNumber="8976567867" });
-=======
-            _employeesList.Add(new Employee() { Name = "Jeeva", Home = "Hosur" ,MailId="jeeva@gmail.com",PhoneNumber="8526764646"});
-            _employeesList.Add(new Employee() { Name = "Vikram", Home = "Chennai",MailId="vikram@hotmail.com",PhoneNumber="8220417431" });
-            _employeesList.Add(new Employee() { Name = "Samiulla", Home = "Rayakottai",MailId="sam@yahoo.com",PhoneNumber="8976567867" });
->>>>>>> 6777718e6d03e3d7796d95775719de3e1a8bd87c
+            _employeesList.Add(new Employee() { Id = ++s_id, Name = "Jeeva", Home = "Hosur", MailId = "jeeva@gmail.com", PhoneNumber = "8526764646" });
+            _employeesList.Add(new Employee() { Id = ++s_id, Name = "Vikram", Home = "Chennai", MailId = "vikram@hotmail.com", PhoneNumber = "8220417431" });
+            _employeesList.Add(new Employee() { Id = ++s_id, Name = "Samiulla", Home = "Rayakottai", MailId = "sam@yahoo.com", PhoneNumber = "8976567867" });
         }
         public Employee AddEmployee(Employee employee)
         {
@@ -27,7 +21,6 @@ namespace Employees.Models
             return employee;
         }
 
-<<<<<<< HEAD
         public void DeleteEmployee(Employee employee)
         {
             _employeesList.Remove(employee);
@@ -41,14 +34,6 @@ namespace Employees.Models
             return employee;
         }
 
-=======
-        public void DeleteEmploye(int Id)
-        {
-            Employee employee = _employeesList.Where(s=>s.Id.Equals(Id)).Select(s=>s);
-            _employeesList.Remove(employee);
-        }
-
->>>>>>> 6777718e6d03e3d7796d95775719de3e1a8bd87c
         public IEnumerable<Employee> GetAllEmployees()
         {
             return _employeesList;
