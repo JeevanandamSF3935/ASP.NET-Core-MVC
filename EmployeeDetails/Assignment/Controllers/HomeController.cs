@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -59,10 +60,19 @@ namespace Employees.Controllers
         {
             if (ModelState.IsValid)
             {
-                string uniqueFileName = UploadedFile(homeDetailsViewModel);
+                string uniqueFileName;
+                if (homeDetailsViewModel.ProfileImage == null)
+                {
+                    uniqueFileName = "nouser.png";
+                }
+                else
+                {
+                    uniqueFileName = UploadedFile(homeDetailsViewModel);
+                }
                 Employee employee = new Employee()
                 {
                     Id = homeDetailsViewModel.Id,
+                    department=homeDetailsViewModel.department.Value,
                     Name = homeDetailsViewModel.Name,
                     Home = homeDetailsViewModel.Home,
                     MailId = homeDetailsViewModel.MailId,
@@ -96,6 +106,7 @@ namespace Employees.Controllers
                 Employee employee = new Employee()
                 {
                     Id = homeDetailsViewModel.Id,
+                    department = homeDetailsViewModel.department.Value,
                     Name = homeDetailsViewModel.Name,
                     Home = homeDetailsViewModel.Home,
                     MailId = homeDetailsViewModel.MailId,
@@ -112,7 +123,21 @@ namespace Employees.Controllers
         {
             Employee employee = _employeeRepositary.GetAllEmployees().FirstOrDefault(s => s.Id.Equals(Id));
             _employeeRepositary.DeleteEmployee(employee);
-            return RedirectToAction("ViewDetails", "Home");
+            return RedirectToAction("ViewDetails");
+        }
+
+        public IActionResult ViewDepartments()
+        {
+            var model = _employeeRepositary.GetAllDepartments();
+            return View(model);
+        }
+
+        public IActionResult ViewDepartment(Department department)
+        {
+            ViewBag.Title = department.Name.ToString();
+            var model = _employeeRepositary.GetAllEmployees();
+            IEnumerable<Employee> resultModel = model.Where(x => x.department.ToString().Equals(department.Name)).Select(x => x);
+            return View(resultModel);
         }
     }
 }

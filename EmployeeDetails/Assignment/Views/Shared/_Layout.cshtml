@@ -3,10 +3,11 @@
 <html>
 <head>
     <link href="~/lib/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/css/StyleSheet.css" rel="stylesheet" />
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
 </head>
-<body style="background-color:grey">
+<body>
     @RenderBody()
     @if (IsSectionDefined("Scripts"))
     {

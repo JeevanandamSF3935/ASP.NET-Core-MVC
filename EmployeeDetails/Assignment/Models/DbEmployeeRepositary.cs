@@ -40,5 +40,11 @@ namespace Employees.Models
         {
             return _context.Employees.Find(Id);
         }
+
+
+        public IEnumerable<Department> GetAllDepartments()
+        {
+            return _context.departments;
+        }
     }
 }

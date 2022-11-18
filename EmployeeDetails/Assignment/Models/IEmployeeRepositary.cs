@@ -9,5 +9,7 @@ namespace Employees.Models
         IEnumerable<Employee> GetAllEmployees();
         void DeleteEmployee(Employee employee);
         Employee EditEmployee(Employee employee);
+
+        IEnumerable<Department> GetAllDepartments();
     }
 }

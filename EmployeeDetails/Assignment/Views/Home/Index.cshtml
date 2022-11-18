@@ -1,7 +1,7 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-<div style="background-color:grey;width:stretch;height:75px">
+<div style="width:stretch;height:75px">
     <h3 style="font-family:'Century Gothic';font-style:italic;text-align:center;font-weight:bolder">
         <img height="70px" width="100px" src="~/images/syncfusion.png" />
         Syncfusion Private Limited
@@ -23,11 +23,12 @@
         </td>
     </tr>
 </table>
-<div style="text-align: center;background-color:grey; width: stretch; height: stretch">
+<div style="text-align: center;width: stretch; height: stretch">
     <br />
     <br />
     <a href="@Url.Action("Register","Home")" class="btn btn-dark btn-outline-success">AddEmployee</a>
     <a href="@Url.Action("ViewDetails","Home")" class="btn btn-dark btn-outline-success">View Employees</a>
+    <a href="@Url.Action("ViewDepartments","Home")" class="btn btn-dark btn-outline-success">View Departments</a>
     <br />
     <br />
     <h4 style="text-align:center">

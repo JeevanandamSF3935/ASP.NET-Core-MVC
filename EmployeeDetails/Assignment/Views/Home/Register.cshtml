@@ -3,10 +3,10 @@
     ViewBag.Title = "Register";
 }
 
-<h1 style="text-align:center;background-color:grey;height:stretch">@ViewBag.Title<hr /></h1>
+<h1 style="text-align:center;height:stretch">@ViewBag.Title</h1>
 
 <form asp-action="Register" asp-controller="Home" method="post" class="mt-3" enctype="multipart/form-data">
-    <div style="padding-left:450px">
+    <div style="padding-left:390px">
         <table style="border:thick,solid;border-color:black;background-color:white;font-weight:bold">
             <tr>
                 <td>
@@ -14,6 +14,17 @@
                 </td>
                 <td>
                     <input asp-for="Name" placeholder="Enter your name" /><br />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="department">Department : </label>
+                </td>
+                <td>
+                    <select asp-for="department" asp-items="Html.GetEnumSelectList<DepartmentSet>()">
+                        <option value="">Select</option>
+                    </select>
+                    <br />
                 </td>
             </tr>
             <tr>
@@ -57,8 +68,9 @@
         <span asp-validation-for="MailId" class="text-bg-danger"></span><br />
         <span asp-validation-for="PhoneNumber" class="text-bg-danger"></span><br />
         <span asp-validation-for="ProfileImage" class="text-bg-danger"></span><br />
+        <span asp-validation-for="department" class="text-bg-danger"></span><br />
     </div>
-    <div class="text-center" style="text-align: center;background-color:grey; width: stretch; height:stretch">
+    <div class="text-center" style="text-align: center; width: stretch; height:stretch">
         <br />
         <br />
         <input class="btn btn-dark btn-outline-success" type="submit" />
@@ -72,11 +84,3 @@
         <br />
     </div>
 </form>
-@section Scripts{
-    <script type="text/javascript">
-        $(".custom-file-input").on("change", function () {
-            var fileName = $(this).val().split("\\").pop();
-            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-        });
-    </script>
-}

@@ -159,3 +159,5 @@ C:\Users\JeevanandamPerumal\source\repos\EmployeeDetails\Assignment\bin\Debug\ne
 C:\Users\JeevanandamPerumal\source\repos\EmployeeDetails\Assignment\bin\Debug\netcoreapp3.1\Npgsql.EntityFrameworkCore.PostgreSQL.dll
 C:\Users\JeevanandamPerumal\source\repos\EmployeeDetails\Assignment\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
 C:\Users\JeevanandamPerumal\source\repos\EmployeeDetails\Assignment\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\JeevanandamPerumal\source\repos\EmployeeDetails\Assignment\obj\Debug\netcoreapp3.1\Razor\Views\Home\ViewDepartments.cshtml.g.cs
+C:\Users\JeevanandamPerumal\source\repos\EmployeeDetails\Assignment\obj\Debug\netcoreapp3.1\Razor\Views\Home\ViewDepartment.cshtml.g.cs

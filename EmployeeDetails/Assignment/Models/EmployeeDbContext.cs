@@ -9,5 +9,6 @@ namespace Employees.Models
         }
 
         public DbSet<Employee> Employees { get; set; }
+        public DbSet<Department> departments { get; set; }
     }
 }

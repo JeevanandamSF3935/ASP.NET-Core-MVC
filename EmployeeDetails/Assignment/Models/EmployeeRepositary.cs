@@ -34,9 +34,19 @@ namespace Employees.Models
             return employee;
         }
 
+        public IEnumerable<Department> GetAllDepartments()
+        {
+            throw new System.NotImplementedException();
+        }
+
         public IEnumerable<Employee> GetAllEmployees()
         {
             return _employeesList;
+        }
+
+        public Department GetDepartment(int Id)
+        {
+            throw new System.NotImplementedException();
         }
 
         public Employee GetEmployee(int Id)

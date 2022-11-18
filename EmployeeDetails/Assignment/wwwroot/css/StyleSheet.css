@@ -1,5 +1,6 @@
-﻿table, th, td {
-    border-color: black;
-    border-style: solid; 
-    border-collapse: collapse;
+﻿a{
+    font-size:large;
+}
+h1{
+    text-align:center;
 }

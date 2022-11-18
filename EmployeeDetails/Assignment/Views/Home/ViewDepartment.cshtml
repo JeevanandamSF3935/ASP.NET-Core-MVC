@@ -1,0 +1,16 @@
+﻿@model IEnumerable<Employee>
+<h1>
+    @ViewBag.Title
+</h1>
+<div class="card-deck card m-3">
+    @foreach (var employee in Model)
+    {
+        <ul>
+            <li><a href="@Url.Action("Details","Home",new { @id=employee.Id})">@employee.Name</a></li>
+        </ul>
+    }
+</div>
+<div class="text-center">
+    <a href="@Url.Action("ViewDepartments","Home")" class="btn btn-dark btn-outline-success">Back</a>
+    <a href="@Url.Action("Index","Home")" class="btn btn-dark btn-outline-success">Home</a>
+</div>

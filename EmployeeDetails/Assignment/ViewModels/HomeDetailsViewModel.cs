@@ -10,6 +10,8 @@ namespace Employees.ViewModels
         [Required]
         [StringLength(50)]
         public string Name { get; set; }
+        [Required(ErrorMessage = "Select the department from list")]
+        public DepartmentSet? department { get; set; }
         [Required]
         [StringLength(10)]
         public string Home { get; set; }
@@ -18,6 +20,7 @@ namespace Employees.ViewModels
         public string MailId { get; set; }
         [Required]
         [StringLength(10)]
+        [DataType(DataType.PhoneNumber)]
         public string PhoneNumber { get; set; }
         public IFormFile ProfileImage { get; set; }
     }

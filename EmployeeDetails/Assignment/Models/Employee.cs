@@ -9,6 +9,8 @@ namespace Employees.Models
         [StringLength(50)]
         public string Name { get; set; }
         [Required]
+        public DepartmentSet department { get; set; }
+        [Required]
         [StringLength(10)]
         public string Home { get; set; }
         [Required]
