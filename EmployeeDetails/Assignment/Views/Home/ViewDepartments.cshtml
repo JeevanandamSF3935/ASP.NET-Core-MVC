@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Department>
+﻿@model ViewDepartments
 @{ 
     ViewBag.Title = "Departments";
 }
@@ -6,12 +6,27 @@
     All Departments
 </h1>
 <div class="card-deck card m-3">
-    @foreach (var department in Model)
-    {
-        <ul>
-            <li><a href="@Url.Action("ViewDepartment","Home",department)">@department.Name</a></li>
-        </ul>
-    }
+    <table class="text-center">
+        <tr style="background-color:cyan">
+            <td><p>Department-Name</p></td>
+            <td><p>Employee-Count</p></td>
+        </tr>
+        @foreach (var department in Model.Departments)
+        {
+            <tr>
+                <td>
+                    <a href="@Url.Action("ViewDepartment","Home",new { @departmentId=department.Id})">@department.Name</a>
+                </td>
+                <td><p>@department.EmployeeCount</p></td>
+            </tr>
+        }
+        <tr>
+            <td>
+                <a href="@Url.Action("ViewDepartment","Home",new { @departmentId=0})">Non-Department Employees</a>
+            </td>
+            <td><p>@Model.NonDepartmentEmployeeCount</p></td>
+        </tr>
+    </table>
 </div>
 <div class="text-center">
     <a href="@Url.Action("Index","Home")" class="btn btn-dark btn-outline-success">Home</a>

@@ -10,7 +10,6 @@ namespace Employees.ViewModels
         [Required]
         [StringLength(50)]
         public string Name { get; set; }
-        [Required(ErrorMessage = "Select the department from list")]
         public DepartmentSet? department { get; set; }
         [Required]
         [StringLength(10)]

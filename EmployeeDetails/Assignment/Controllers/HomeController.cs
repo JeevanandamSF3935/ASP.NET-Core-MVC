@@ -12,9 +12,9 @@ namespace Employees.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IEmployeeRepositary _employeeRepositary;
-        private readonly IWebHostEnvironment _webHostEnvironment;
-        public HomeController(IEmployeeRepositary employeeRepositary,IWebHostEnvironment webHostEnvironment)
+        private readonly IEmployeeRepositary _employeeRepositary = null;
+        private readonly IWebHostEnvironment _webHostEnvironment = null;
+        public HomeController(IEmployeeRepositary employeeRepositary, IWebHostEnvironment webHostEnvironment)
         {
             _webHostEnvironment = webHostEnvironment;
             _employeeRepositary = employeeRepositary;
@@ -26,7 +26,7 @@ namespace Employees.Controllers
 
         public ActionResult ViewDetails()
         {
-            var model = _employeeRepositary.GetAllEmployees();
+            var model = _employeeRepositary.ViewEmployees();
             return View(model);
         }
         public ActionResult Details(int id)
@@ -40,7 +40,7 @@ namespace Employees.Controllers
             return View();
         }
 
-        private string UploadedFile(HomeDetailsViewModel model)
+        public string UploadedFile(HomeDetailsViewModel model)
         {
             string uniqueFileName = null;
 
@@ -52,6 +52,7 @@ namespace Employees.Controllers
                 using var fileStream = new FileStream(filePath, FileMode.Create);
                 model.ProfileImage.CopyTo(fileStream);
             }
+
             return uniqueFileName;
         }
 
@@ -60,45 +61,32 @@ namespace Employees.Controllers
         {
             if (ModelState.IsValid)
             {
-                string uniqueFileName;
+                string imageFileName;
                 if (homeDetailsViewModel.ProfileImage == null)
                 {
-                    uniqueFileName = "nouser.png";
+                    imageFileName = "nouser.png";
                 }
                 else
                 {
-                    uniqueFileName = UploadedFile(homeDetailsViewModel);
+                    imageFileName = UploadedFile(homeDetailsViewModel);
                 }
-                Employee employee = new Employee()
-                {
-                    Id = homeDetailsViewModel.Id,
-                    department=homeDetailsViewModel.department.Value,
-                    Name = homeDetailsViewModel.Name,
-                    Home = homeDetailsViewModel.Home,
-                    MailId = homeDetailsViewModel.MailId,
-                    PhoneNumber = homeDetailsViewModel.PhoneNumber,
-                    ProfileImage = uniqueFileName
-                };
-                
-                Employee newEmployee = _employeeRepositary.AddEmployee(employee);
+                Employee newEmployee = _employeeRepositary.AddEmployee(homeDetailsViewModel,imageFileName);
                 return RedirectToAction("Details", new { @id = newEmployee.Id });
             }
             return View();
         }
-        public IActionResult Edit(Employee employee)
+        public IActionResult Edit(HomeDetailsViewModel homeDetailsViewModel)
         {
-            HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel()
+            if (homeDetailsViewModel.department.Value != default) 
             {
-                Id = employee.Id,
-                Name = employee.Name,
-                MailId = employee.MailId,
-                PhoneNumber = employee.PhoneNumber,
-                Home = employee.Home
-            };
+                Department department = _employeeRepositary.GetAllDepartments().FirstOrDefault(x => x.Name.Equals(homeDetailsViewModel.department.ToString()));
+                department.EmployeeCount--;
+                Department departmentUpdated = _employeeRepositary.UpdateDepartment(department);
+            }
             return View(homeDetailsViewModel);
         }
         [HttpPost]
-        public IActionResult Edit(HomeDetailsViewModel homeDetailsViewModel, int Id)
+        public IActionResult Edit(HomeDetailsViewModel homeDetailsViewModel,int employeeId)
         {
             if (ModelState.IsValid)
             {
@@ -113,31 +101,42 @@ namespace Employees.Controllers
                     PhoneNumber = homeDetailsViewModel.PhoneNumber,
                     ProfileImage = uniqueFileName
                 };
-                _employeeRepositary.EditEmployee(employee);
+                _employeeRepositary.EditEmployee(employee,uniqueFileName);
 
                 return RedirectToAction("Details", new { @id = employee.Id });
             }
-            return View();
+            return View(homeDetailsViewModel);
         }
-        public IActionResult Delete(int Id)
+        public IActionResult Delete(int id)
         {
-            Employee employee = _employeeRepositary.GetAllEmployees().FirstOrDefault(s => s.Id.Equals(Id));
-            _employeeRepositary.DeleteEmployee(employee);
+            _employeeRepositary.DeleteEmployee(id);
             return RedirectToAction("ViewDetails");
         }
 
         public IActionResult ViewDepartments()
         {
-            var model = _employeeRepositary.GetAllDepartments();
-            return View(model);
+            var departments = _employeeRepositary.GetAllDepartments();
+            var employees = _employeeRepositary.GetAllEmployees().Where(x => x.department.Equals(null)).Select(x => x);
+            ViewDepartments view = new ViewDepartments()
+            {
+                Departments = departments,
+                NonDepartmentEmployeeCount = employees.Count(),
+                EmployeesList = employees
+            };
+            return View(view);
         }
-
-        public IActionResult ViewDepartment(Department department)
+        public IActionResult ViewDepartment(int departmentId)
         {
-            ViewBag.Title = department.Name.ToString();
-            var model = _employeeRepositary.GetAllEmployees();
-            IEnumerable<Employee> resultModel = model.Where(x => x.department.ToString().Equals(department.Name)).Select(x => x);
-            return View(resultModel);
+            var selectedEmployees = _employeeRepositary.ViewDepartment(departmentId);
+            if (departmentId == 0)
+            {
+                ViewBag.Title = "Non-Department";
+            }
+            else
+            {
+                ViewBag.Title = selectedEmployees.First().department.Value;
+            }
+            return View(selectedEmployees);
         }
     }
 }

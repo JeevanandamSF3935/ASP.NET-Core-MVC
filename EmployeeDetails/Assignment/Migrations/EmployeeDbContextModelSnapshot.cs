@@ -25,6 +25,9 @@ namespace Employees.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
+                    b.Property<int>("EmployeeCount")
+                        .HasColumnType("integer");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("character varying(50)")
@@ -74,7 +77,7 @@ namespace Employees.Migrations
 
                     b.ToTable("Employees");
                 });
-#pragma warning restore 612, 618
+
         }
     }
 }

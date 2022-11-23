@@ -8,6 +8,7 @@ namespace Employees.Models
 {
     public enum DepartmentSet
     {
+        Default,
         IT,
         Security,
         Developer
@@ -18,5 +19,6 @@ namespace Employees.Models
         [Required]
         [StringLength(50)]
         public string Name { get; set; }
+        public int EmployeeCount { get; set; }
     }
 }

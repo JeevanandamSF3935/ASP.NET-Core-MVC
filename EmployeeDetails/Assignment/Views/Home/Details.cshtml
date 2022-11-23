@@ -1,6 +1,18 @@
 ﻿@model Employee
 @{
     ViewBag.Title = "Employee Details";
+    string department="";
+}
+@{ 
+    HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel()
+    {
+        Id = Model.Id,
+        Name = Model.Name,
+        PhoneNumber = Model.PhoneNumber,
+        MailId = Model.MailId,
+        department = Model.department,
+        Home = Model.Home
+    };
 }
 <h3>@ViewBag.Title</h3>
 <div class="row justify-content-center m-3">
@@ -12,7 +24,8 @@
             <div class="card-body text-center">
                 <h4>Employee ID : @Model.Id</h4>
                 <h4>Name : @Model.Name</h4>
-                <h4>Depatment : @Model.department</h4>
+                @{department = (Model.department == null) ? "Department not alloted" : Model.department.ToString(); }
+                <h4>Department : @department</h4>
                 <h4>City : @Model.Home</h4>
                 <h4>MailID : @Model.MailId</h4>
                 <h4>Phone Number : @Model.PhoneNumber</h4>
@@ -20,7 +33,7 @@
                 <div style="text-align:center"><img width="150px" height="118px" src="~/uploadedImages/@Model.ProfileImage" asp-append-version="true" /></div>
                 <div class="card-footer text-center">
                     <a href="@Url.Action("ViewDetails","Home")" class="btn btn-primary">Back</a>
-                    <a href="@Url.Action("Edit","Home",Model)" class="btn btn-primary">Edit</a>
+                    <a href="@Url.Action("Edit","Home",homeDetailsViewModel)" class="btn btn-primary">Edit</a>
                     <a href="@Url.Action("Delete","Home",new { @Id = Model.Id})" class="btn btn-danger">Delete</a>
                 </div>
             </div>
