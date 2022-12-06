@@ -1,0 +1,44 @@
+﻿@model Books
+@{
+    ViewBag.Title = "Edit Books";
+}
+<form asp-action="EditBook" asp-controller="Home" method="post" enctype="multipart/form-data">
+    <input asp-for="BookId" value="@Model.BookId" hidden="hidden" />
+    <table class="table table-borderless">
+        <tr><td><h1>@ViewBag.Title</h1></td></tr>
+        <tr>
+            <td><label asp-for="BookCategoryId">Category </label></td>
+            <td>
+                <select asp-for="BookCategoryId" asp-items="Html.GetEnumSelectList<BooksCategories>()">
+                    <option value="">Select</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><span class="text-bg-danger" asp-validation-for="BookCategoryId"></span></td>
+        </tr>
+        <tr>
+            <td><label asp-for="BookName">Book</label></td>
+            <td><input asp-for="BookName" type="text" /></td>
+        </tr>
+        <tr><td></td><td><span class="text-bg-danger" asp-validation-for="BookName"></span></td></tr>
+        <tr>
+            <td><label asp-for="AuthorName">Author Name </label></td>
+            <td><input asp-for="AuthorName" type="text" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><span class="text-bg-danger" asp-validation-for="AuthorName"></span></td>
+        </tr>
+        <tr>
+            <td><label asp-for="PublishYear">Published</label></td>
+            <td><input asp-for="PublishYear" type="text" /></td>
+        </tr>
+        <tr>
+            <td><label asp-for="Price">Price</label></td>
+            <td><input asp-for="Price" type="text" /></td>
+        </tr>
+    </table>
+    <pre style="text-align:center"><input type="submit" value="Save" /> <input onclick="window.location.href = '@Url.Action("AddBook","Home")'" type="button" value="Cancel" /></pre>
+</form>

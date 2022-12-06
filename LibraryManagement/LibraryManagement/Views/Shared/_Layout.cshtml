@@ -1,0 +1,19 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <link href="~/lib/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/css/style.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width" />
+</head>
+<body>
+    <div>
+        <br />
+        <pre><img src="~/images/syncfusion.png" width="50px" height="50px" />   Library Portal         <a href="@Url.Action("Index","Home")">Books</a></pre>
+    </div>
+    @RenderBody()
+    <div>
+        <pre><br>Copyright @@ 2019 - presenting Syncfusion<br><br></pre>
+    </div>
+</body>
+</html>

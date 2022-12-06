@@ -1,0 +1,76 @@
+﻿@model BookViewModel;
+
+@{ 
+    ViewBag.Title = "Book Details";
+}
+<style>
+    p{
+        margin-left:20px;
+    }
+</style>
+<div>
+    <table class="table table-borderless">
+        <tr>
+            <td><h1>@Model.Book.BookName Book Details</h1></td>
+            <td><pre><input type="button" onclick="window.location.href = '@Url.Action("EditBook", "Home", new {@bookId=Model.Book.BookId})'" value="Edit" />   <input type="button" onclick="window.location.href = '@Url.Action("DeleteBook", "Home", new {@bookId=Model.Book.BookId})'" value="Delete" /></pre></td>
+        </tr>
+        <tr>
+            <td><p>Book Id : </p></td>
+            <td><p>@Model.Book.BookId</p></td>
+        </tr>
+        <tr>
+            <td><p>Category : </p></td>
+            <td><p>@Model.BookCategory.CategoryName</p></td>
+        </tr>
+        <tr>
+            <td><p>Book Name : </p></td>
+            <td><p>@Model.Book.BookName</p></td>
+        </tr>
+        @if (Model.Book.AuthorName == null)
+        {
+            <tr>
+                <td><p>Author Name : </p></td>
+                <td><p>-</p></td>
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <td><p>Author Name : </p></td>
+                <td><p>@Model.Book.AuthorName</p></td>
+            </tr>
+        }
+        @if (Model.Book.Price == null)
+        {
+            <tr>
+                <td><p>Price : </p></td>
+                <td><p>-</p></td>
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <td><p>Price : </p></td>
+                <td><p>@Model.Book.Price</p></td>
+            </tr>
+        }
+        @if (Model.Book.PublishYear == null)
+        {
+            <tr>
+                <td><p>Published : </p></td>
+                <td><p>-</p></td>
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <td><p>Published : </p></td>
+                <td><p>@Model.Book.PublishYear</p></td>
+            </tr>
+        }
+        <tr>
+            <td><p>Updated : </p></td>
+            <td><p>@Model.Book.UpdatedOn.ToLongDateString()</p></td>
+        </tr>
+    </table>
+</div>
