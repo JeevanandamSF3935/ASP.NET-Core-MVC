@@ -3,7 +3,6 @@
     ViewBag.Title = "Library Management";
 }
 <div>
-
     <table class="table table-borderless">
         <tr>
             <td>
@@ -19,6 +18,7 @@
     <table class="table table-bordered">
         <tr>
             <th>ID</th>
+            <th>Category</th>
             <th>Book</th>
             <th>Author</th>
             <th>Published</th>
@@ -36,112 +36,119 @@
                         if (book.AuthorName == null && book.Price == null && book.PublishYear == null)
                         {
                             <tr>
-                                <td><a href="@Url.Action("ViewBook","Home",book)">@book.BookId</a></td>
+                                <td><a href="@Url.Action("ViewBook","Home",new{@id=book.BookId})">@book.BookId</a></td>
+                                <td>@Enum.GetName(typeof(BooksCategories), book.BookCategoryId)</td>
                                 <td>@book.BookName</td>
                                 <td>-</td>
                                 <td>-</td>
                                 <td>-</td>
                                 <td>@book.UpdatedOn.ToString("dd/MM/yyyy")</td>
                                 <td>
-                                    <a href="@Url.Action("EditBook","Home",new {@bookId=book.BookId})">Edit</a>
+                                    <a href="@Url.Action("EditBook","Home",new {@id=book.BookId})">Edit</a>
                                     <a> | </a>
-                                    <a href="@Url.Action("DeleteBook","Home",new {@bookId=book.BookId})">Delete</a>
+                                    <a href="@Url.Action("DeleteBook","Home",new {@id=book.BookId})">Delete</a>
                                 </td>
                             </tr>
                         }
                         else if (book.PublishYear == null && book.Price == null)
                         {
                             <tr>
-                                <td><a href="@Url.Action("ViewBook","Home",book)">@book.BookId</a></td>
+                                <td><a href="@Url.Action("ViewBook","Home",new{@id=book.BookId})">@book.BookId</a></td>
+                                <td>@Enum.GetName(typeof(BooksCategories), book.BookCategoryId)</td>
                                 <td>@book.BookName</td>
                                 <td>@book.AuthorName</td>
                                 <td>-</td>
                                 <td>-</td>
                                 <td>@book.UpdatedOn.ToString("dd/MM/yyyy")</td>
                                 <td>
-                                    <a href="@Url.Action("EditBook","Home",new {@bookId=book.BookId})">Edit</a>
+                                    <a href="@Url.Action("EditBook","Home",new {@id=book.BookId})">Edit</a>
                                     <a> | </a>
-                                    <a href="@Url.Action("DeleteBook","Home",new {@bookId=book.BookId})">Delete</a>
+                                    <a href="@Url.Action("DeleteBook","Home",new {@id=book.BookId})">Delete</a>
                                 </td>
                             </tr>
                         }
                         else if (book.AuthorName == null && book.Price == null)
                         {
                             <tr>
-                                <td><a href="@Url.Action("ViewBook","Home",book)">@book.BookId</a></td>
+                                <td><a href="@Url.Action("ViewBook","Home",new{@id=book.BookId})">@book.BookId</a></td>
+                                <td>@Enum.GetName(typeof(BooksCategories), book.BookCategoryId)</td>
                                 <td>@book.BookName</td>
                                 <td>-</td>
                                 <td>@book.PublishYear</td>
                                 <td>-</td>
                                 <td>@book.UpdatedOn.ToString("dd/MM/yyyy")</td>
                                 <td>
-                                    <a href="@Url.Action("EditBook","Home",new {@bookId=book.BookId})">Edit</a>
+                                    <a href="@Url.Action("EditBook","Home",new {@id=book.BookId})">Edit</a>
                                     <a> | </a>
-                                    <a href="@Url.Action("DeleteBook","Home",new {@bookId=book.BookId})">Delete</a>
+                                    <a href="@Url.Action("DeleteBook","Home",new {@id=book.BookId})">Delete</a>
                                 </td>
                             </tr>
                         }
                         else if (book.AuthorName == null && book.PublishYear == null)
                         {
                             <tr>
-                                <td><a href="@Url.Action("ViewBook","Home",book)">@book.BookId</a></td>
+                                <td><a href="@Url.Action("ViewBook","Home",new{@id=book.BookId})">@book.BookId</a></td>
+                                <td>@Enum.GetName(typeof(BooksCategories), book.BookCategoryId)</td>
                                 <td>@book.BookName</td>
                                 <td>-</td>
                                 <td>-</td>
                                 <td>Rs @book.Price</td>
                                 <td>@book.UpdatedOn.ToString("dd/MM/yyyy")</td>
                                 <td>
-                                    <a href="@Url.Action("EditBook","Home",new {@bookId=book.BookId})">Edit</a>
+                                    <a href="@Url.Action("EditBook","Home",new {@id=book.BookId})">Edit</a>
                                     <a> | </a>
-                                    <a href="@Url.Action("DeleteBook","Home",new {@bookId=book.BookId})">Delete</a>
+                                    <a href="@Url.Action("DeleteBook","Home",new {@id=book.BookId})">Delete</a>
                                 </td>
                             </tr>
                         }
                         else if (book.Price == null)
                         {
                             <tr>
-                                <td><a href="@Url.Action("ViewBook","Home",book)">@book.BookId</a></td>
+                                <td><a href="@Url.Action("ViewBook","Home",new{@id=book.BookId})">@book.BookId</a></td>
+                                <td>@Enum.GetName(typeof(BooksCategories), book.BookCategoryId)</td>
                                 <td>@book.BookName</td>
                                 <td>@book.AuthorName</td>
                                 <td>@book.PublishYear</td>
                                 <td>-</td>
                                 <td>@book.UpdatedOn.ToString("dd/MM/yyyy")</td>
                                 <td>
-                                    <a href="@Url.Action("EditBook","Home",new {@bookId=book.BookId})">Edit</a>
+                                    <a href="@Url.Action("EditBook","Home",new {@id=book.BookId})">Edit</a>
                                     <a> | </a>
-                                    <a href="@Url.Action("DeleteBook","Home",new {@bookId=book.BookId})">Delete</a>
+                                    <a href="@Url.Action("DeleteBook","Home",new {@id=book.BookId})">Delete</a>
                                 </td>
                             </tr>
                         }
                         else if (book.PublishYear == null)
                         {
                             <tr>
-                                <td><a href="@Url.Action("ViewBook","Home",book)">@book.BookId</a></td>
+                                <td><a href="@Url.Action("ViewBook","Home",new{@id=book.BookId})">@book.BookId</a></td>
+                                <td>@Enum.GetName(typeof(BooksCategories), book.BookCategoryId)</td>
                                 <td>@book.BookName</td>
                                 <td>@book.AuthorName</td>
                                 <td>-</td>
                                 <td>Rs @book.Price</td>
                                 <td>@book.UpdatedOn.ToString("dd/MM/yyyy")</td>
                                 <td>
-                                    <a href="@Url.Action("EditBook","Home",new {@bookId=book.BookId})">Edit</a>
+                                    <a href="@Url.Action("EditBook","Home",new {@id=book.BookId})">Edit</a>
                                     <a> | </a>
-                                    <a href="@Url.Action("DeleteBook","Home",new {@bookId=book.BookId})">Delete</a>
+                                    <a href="@Url.Action("DeleteBook","Home",new {@id=book.BookId})">Delete</a>
                                 </td>
                             </tr>
                         }
                         else
                         {
                             <tr>
-                                <td><a href="@Url.Action("ViewBook","Home",book)">@book.BookId</a></td>
+                                <td><a href="@Url.Action("ViewBook","Home",new{@id=book.BookId})">@book.BookId</a></td>
+                                <td>@Enum.GetName(typeof(BooksCategories), book.BookCategoryId)</td>
                                 <td>@book.BookName</td>
                                 <td>-</td>
                                 <td>@book.PublishYear</td>
                                 <td>Rs @book.Price</td>
                                 <td>@book.UpdatedOn.ToString("dd/MM/yyyy")</td>
                                 <td>
-                                    <a href="@Url.Action("EditBook","Home",new {@bookId=book.BookId})">Edit</a>
+                                    <a href="@Url.Action("EditBook","Home",new {@id=book.BookId})">Edit</a>
                                     <a> | </a>
-                                    <a href="@Url.Action("DeleteBook","Home",new {@bookId=book.BookId})">Delete</a>
+                                    <a href="@Url.Action("DeleteBook","Home",new {@id=book.BookId})">Delete</a>
                                 </td>
                             </tr>
                         }
@@ -149,16 +156,17 @@
                     else
                     {
                         <tr>
-                            <td><a href="@Url.Action("ViewBook","Home",book)">@book.BookId</a></td>
+                            <td><a href="@Url.Action("ViewBook","Home",new{@id=book.BookId})">@book.BookId</a></td>
+                            <td>@Enum.GetName(typeof(BooksCategories), book.BookCategoryId)</td>
                             <td>@book.BookName</td>
                             <td>@book.AuthorName</td>
                             <td>@book.PublishYear</td>
                             <td>Rs @book.Price</td>
                             <td>@book.UpdatedOn.ToString("dd/MM/yyyy")</td>
                             <td>
-                                <a href="@Url.Action("EditBook","Home",new {@bookId=book.BookId})">Edit</a>
+                                <a href="@Url.Action("EditBook","Home",new {@id=book.BookId})">Edit</a>
                                 <a> | </a>
-                                <a href="@Url.Action("DeleteBook","Home",new {@bookId=book.BookId})">Delete</a>
+                                <a href="@Url.Action("DeleteBook","Home",new {@id=book.BookId})">Delete</a>
                             </td>
                         </tr>
                     }

@@ -2,13 +2,11 @@
 using LibraryManagement.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace LibraryManagement.Controllers
 {
-    public class HomeController:Controller
+    public class HomeController : Controller
     {
         private IBookRepository _bookRepository;
 
@@ -18,10 +16,10 @@ namespace LibraryManagement.Controllers
         }
         public IActionResult Index()
         {
-            var model = _bookRepository.GetAllBooks();
+            var model = _bookRepository.GetAllBooks().OrderBy(x => x.BookId);
             IndexViewModel indexView = new IndexViewModel()
             {
-                Books=model
+                Books = model
             };
             return View(indexView);
         }
@@ -30,20 +28,22 @@ namespace LibraryManagement.Controllers
         {
             if (indexView.SearchString != null)
             {
-                var model = _bookRepository.GetAllBooks().Where(x => x.BookName.ToLower().Contains(indexView.SearchString.ToLower()));
+                var model = _bookRepository.GetAllBooks().Where(x => x.BookName.ToLower().Contains(indexView.SearchString.ToLower())).OrderBy(x => x.BookId);
                 indexView.Books = model;
                 return View(indexView);
             }
             else
             {
-                var model = _bookRepository.GetAllBooks();
+                var model = _bookRepository.GetAllBooks().OrderBy(x=>x.BookId);
                 indexView.Books = model;
                 return View(indexView);
             }
         }
-        public IActionResult ViewBook(Books book)
+        [Route("books/{id}")]
+        public IActionResult ViewBook(int id)
         {
-            BookViewModel bookView = _bookRepository.ViewBook(book);
+            BookViewModel bookView = _bookRepository.ViewBook(id);
+            if (bookView == null || bookView.Book.IsDeleted==true) { ViewBag.Message = "No book found for given ID"; }
             return View(bookView);
         }
         public IActionResult AddBook()
@@ -56,14 +56,21 @@ namespace LibraryManagement.Controllers
             if (ModelState.IsValid)
             {
                 Books newBook = _bookRepository.AddBook(book);
-                return RedirectToAction("ViewBook",book);
+                if (newBook != null)
+                {
+                    return RedirectToAction("ViewBook", new { @id= newBook.BookId });
+                }
+                else
+                {
+                    ViewBag.Message = "Book Name already exists";
+                }
             }
             return View();
         }
 
-        public IActionResult EditBook(int bookId)
+        public IActionResult EditBook(int id)
         {
-            var book = _bookRepository.GetBook(bookId);
+            var book = _bookRepository.GetBook(id);
             return View(book);
         }
         [HttpPost]
@@ -72,15 +79,22 @@ namespace LibraryManagement.Controllers
             if (ModelState.IsValid)
             {
                 book.UpdatedOn = DateTime.Now;
-                _bookRepository.EditBook(book);
-                return RedirectToAction("ViewBook", book);
+                var newBook = _bookRepository.EditBook(book);
+                if (newBook != null)
+                {
+                    return RedirectToAction("ViewBook", new { @id = newBook.BookId });
+                }
+                else
+                {
+                    ViewBag.Message = "Book Name already exists";
+                }
             }
             return View(book);
         }
 
-        public IActionResult DeleteBook(int bookId)
+        public IActionResult DeleteBook(int id)
         {
-            _bookRepository.DeleteBook(bookId);
+            _bookRepository.DeleteBook(id);
             return RedirectToAction("Index");
         }
     }

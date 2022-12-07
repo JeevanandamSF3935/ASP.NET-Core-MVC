@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace LibraryManagement.Models
 {
@@ -19,48 +18,75 @@ namespace LibraryManagement.Models
             return _context.Books;
         }
 
-        public Books GetBook(int bookId)
+        public Books GetBook(int id)
         {
-            Books book = _context.Books.FirstOrDefault(x => x.BookId.Equals(bookId));
+            Books book = _context.Books.FirstOrDefault(x => x.BookId.Equals(id));
             return book;
         }
 
         public Books AddBook(Books book)
         {
             book.UpdatedOn = DateTime.Now;
-            _context.Books.Add(book);
-            _context.SaveChanges();
+            var books = GetAllBooks().Where(x => x.BookName.Equals(book.BookName));
+            if (books.Count()==0)
+            {
+                _context.Books.Add(book);
+                _context.SaveChanges();
+            }
+            else
+            {
+                book = null;
+            }
             return book;
         }
 
+        public IEnumerable<BookCategories> GetAllCategories()
+        {
+            return _context.BookCategories;
+        }
         public BookCategories GetCategory(int categoryId)
         {
             BookCategories bookCategory = _context.BookCategories.FirstOrDefault(x => x.CategoryId.Equals(categoryId));
             return bookCategory;
         }
 
-        public BookViewModel ViewBook(Books book)
+        public BookViewModel ViewBook(int id)
         {
-            BookCategories category = GetCategory(book.BookCategoryId);
-            BookViewModel bookView = new BookViewModel()
+            BookViewModel bookView = null;
+            var book = GetBook(id);
+            if (book != null)
             {
-                Book = book,
-                BookCategory = category
-            };
+                BookCategories category = GetCategory(book.BookCategoryId);
+                bookView = new BookViewModel()
+                {
+                    Book = book,
+                    BookCategory = category
+                };
+            }
             return bookView;
         }
 
         public Books EditBook(Books book)
         {
-            var newBook = _context.Books.Find(book.BookId);
-            newBook.AuthorName = book.AuthorName;
-            newBook.BookCategoryId = book.BookCategoryId;
-            newBook.BookName = book.BookName;
-            newBook.IsDeleted = book.IsDeleted;
-            newBook.Price = book.Price;
-            newBook.PublishYear = book.PublishYear;
-            newBook.UpdatedOn = book.UpdatedOn;
-            _context.SaveChanges();
+            var newBook = new Books();
+            var books = GetAllBooks().Where(x => x.BookName.Equals(book.BookName)&x.BookId!=book.BookId);
+            if (books.Count() == 0)
+            {
+                newBook = _context.Books.Find(book.BookId);
+                newBook.AuthorName = book.AuthorName;
+                newBook.BookCategoryId = book.BookCategoryId;
+                newBook.BookName = book.BookName;
+                newBook.IsDeleted = book.IsDeleted;
+                newBook.Price = book.Price;
+                newBook.PublishYear = book.PublishYear;
+                newBook.UpdatedOn = book.UpdatedOn;
+                _context.SaveChanges();
+            }
+            else
+            {
+                newBook = null;
+            }
+            
             return newBook;
         }
 
