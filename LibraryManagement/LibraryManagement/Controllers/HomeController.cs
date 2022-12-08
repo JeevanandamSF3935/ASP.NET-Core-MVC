@@ -39,7 +39,7 @@ namespace LibraryManagement.Controllers
                 return View(indexView);
             }
         }
-        [Route("books/{id}")]
+        [Route("book/{id}")]
         public IActionResult ViewBook(int id)
         {
             BookViewModel bookView = _bookRepository.ViewBook(id);

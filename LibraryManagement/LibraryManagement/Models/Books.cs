@@ -12,7 +12,7 @@ namespace LibraryManagement.Models
         public string? AuthorName { get; set; }
         [Display(Name ="Year")]
         [RegularExpression("^[0-9]*$",ErrorMessage = "Year should be only numericals")]
-        [Range(1,2022,ErrorMessage = "Enter valid year upto present year")]
+        [RangeUntilCurrentYear(1, ErrorMessage = "Enter valid year upto present year")]
         public int? PublishYear { get; set; }
         [RegularExpression("^[0-9]*$",ErrorMessage="Price should be only numericals")]
         public double? Price { get; set; }

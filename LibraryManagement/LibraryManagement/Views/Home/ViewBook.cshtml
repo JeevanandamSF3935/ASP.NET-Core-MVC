@@ -14,7 +14,7 @@
         <table class="table table-borderless">
             <tr>
                 <td><h1>@Model.Book.BookName Book Details</h1></td>
-                <td><pre><input type="button" onclick="window.location.href = '@Url.Action("EditBook", "Home", new {@id=Model.Book.BookId})'" value="Edit" />   <input type="button" onclick="window.location.href = '@Url.Action("DeleteBook", "Home", new {@id=Model.Book.BookId})'" value="Delete" /></pre></td>
+                <td><pre><input type="button" onclick="window.location.href = '@Url.Action("EditBook", "Home", new {@id=Model.Book.BookId})'" value="Edit" />   <input type="button" onclick="OnClickDelete()" value="Delete" /></pre></td>
             </tr>
             <tr>
                 <td><p>Book Id : </p></td>
@@ -81,3 +81,14 @@
         <h3>@ViewBag.Message</h3><br /><br />
     }
 </div>
+<script>
+    function OnClickDelete() {
+        if (confirm("Are you sure you want to delete ?")){
+            window.location.href = "@Url.Action("DeleteBook", "Home", new { @id = Model.Book.BookId })"
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+</script>

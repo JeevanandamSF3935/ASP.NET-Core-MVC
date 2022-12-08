@@ -18,7 +18,6 @@ C:\Users\JeevanandamPerumal\source\repos\LibraryManagement\LibraryManagement\bin
 C:\Users\JeevanandamPerumal\source\repos\LibraryManagement\LibraryManagement\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Relational.dll
 C:\Users\JeevanandamPerumal\source\repos\LibraryManagement\LibraryManagement\bin\Debug\netcoreapp3.1\Npgsql.dll
 C:\Users\JeevanandamPerumal\source\repos\LibraryManagement\LibraryManagement\bin\Debug\netcoreapp3.1\Npgsql.EntityFrameworkCore.PostgreSQL.dll
-C:\Users\JeevanandamPerumal\source\repos\LibraryManagement\LibraryManagement\obj\Debug\netcoreapp3.1\LibraryManagement.csproj.AssemblyReference.cache
 C:\Users\JeevanandamPerumal\source\repos\LibraryManagement\LibraryManagement\obj\Debug\netcoreapp3.1\LibraryManagement.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\JeevanandamPerumal\source\repos\LibraryManagement\LibraryManagement\obj\Debug\netcoreapp3.1\LibraryManagement.AssemblyInfoInputs.cache
 C:\Users\JeevanandamPerumal\source\repos\LibraryManagement\LibraryManagement\obj\Debug\netcoreapp3.1\LibraryManagement.AssemblyInfo.cs
